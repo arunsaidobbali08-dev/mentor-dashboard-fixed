@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MentorMap AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=mentor-debug-1" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand">
+          <span class="brand-mark">M</span>
+          <div>
+            <strong>MentorMap AI</strong>
+            <small>Roadmaps with coaching</small>
+          </div>
+        </div>
+
+        <nav class="nav-list" aria-label="Dashboard navigation">
+          <a href="#home" class="active">Home</a>
+          <a href="#roadmap">Roadmap</a>
+          <a href="#missions">Missions</a>
+          <a href="#mentor">AI Mentor</a>
+          <a href="#bookmarks">Bookmarks</a>
+        </nav>
+
+        <div class="sidebar-panel">
+          <span>Active roadmap</span>
+          <strong id="sidebarRole">Choose a role</strong>
+          <button type="button" id="bookmarkBtn" class="ghost-btn">Save roadmap</button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="mobile-header">
+          <button type="button" id="sidebarToggle" class="ghost-btn">Menu</button>
+          <strong>MentorMap AI</strong>
+        </header>
+
+        <section class="hero" id="home">
+          <div class="hero-copy">
+            <p class="eyebrow">AI mentor plus roadmap platform</p>
+            <h1>Choose a tech career. Get a visual roadmap, daily missions, and mentor guidance.</h1>
+            <p class="hero-text">A professional learning cockpit for technical roles, combining roadmap.sh-style paths with AI coaching, project planning, interview prep, and gamified progress.</p>
+          </div>
+
+          <form class="search-card" id="roleForm">
+            <label for="roleInput">Search any technical role</label>
+            <div class="search-row">
+              <input id="roleInput" type="search" placeholder="Frontend Developer, AI Engineer, SRE..." autocomplete="off" list="roleOptions" />
+              <button type="submit" id="generateBtn">Generate</button>
+            </div>
+            <datalist id="roleOptions"></datalist>
+            <div class="role-chips" id="roleChips" aria-label="Suggested technical roles"></div>
+          </form>
+        </section>
+
+        <section class="home-grid">
+          <article class="panel continue-card">
+            <div class="panel-heading compact">
+              <div>
+                <p class="eyebrow">Continue learning</p>
+                <h2 id="continueTitle">Start your first roadmap</h2>
+              </div>
+              <span class="badge" id="levelBadge">Level 1</span>
+            </div>
+            <p id="continueText" class="summary">Search a role to unlock daily learning, mentor chat, and career-specific projects.</p>
+            <div class="mini-progress">
+              <span id="miniProgressLabel">0%</span>
+              <div><i id="miniProgressBar"></i></div>
+            </div>
+          </article>
+
+          <article class="panel" id="bookmarks">
+            <div class="panel-heading compact">
+              <div>
+                <p class="eyebrow">Saved</p>
+                <h2>Bookmarks</h2>
+              </div>
+            </div>
+            <div class="bookmark-list" id="bookmarkList"></div>
+          </article>
+        </section>
+
+        <section class="career-section">
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">Explore</p>
+              <h2>Trending roadmaps</h2>
+            </div>
+            <span class="summary">Role-specific paths for major technical careers</span>
+          </div>
+          <div class="career-grid" id="careerGrid"></div>
+        </section>
+
+        <section class="stats-grid" aria-label="Learning statistics">
+          <article class="stat-card">
+            <span>Total XP</span>
+            <strong id="xpValue">0</strong>
+            <small id="nextLevelText">100 XP to next level</small>
+          </article>
+          <article class="stat-card accent">
+            <span>Streak</span>
+            <strong id="streakValue">0</strong>
+            <small>days active</small>
+          </article>
+          <article class="stat-card">
+            <span>Completed</span>
+            <strong id="completedValue">0</strong>
+            <small>missions done</small>
+          </article>
+          <article class="progress-card">
+            <div class="ring" id="progressRing" style="--progress: 0">
+              <span id="progressValue">0%</span>
+            </div>
+            <div>
+              <span>Roadmap progress</span>
+              <strong id="progressLabel">Ready to begin</strong>
+            </div>
+          </article>
+        </section>
+
+        <section class="workspace-grid">
+          <section class="panel roadmap-panel" id="roadmap">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Visual roadmap</p>
+                <h2 id="roadmapTitle">Generate your first path</h2>
+              </div>
+              <div class="heading-actions">
+                <button type="button" id="roadmapBookmarkBtn" class="ghost-btn">Save roadmap</button>
+                <span id="timelineBadge" class="badge">No timeline yet</span>
+              </div>
+            </div>
+            <p class="summary" id="roadmapSummary">Search for a role to create a connected roadmap with skills, tools, projects, interview prep, resources, and FAQs.</p>
+            <div id="roadmapMeta" class="insight-grid"></div>
+            <div class="roadmap-visual" id="roadmapVisual"></div>
+            <div class="phase-list" id="phaseList"></div>
+          </section>
+
+          <aside class="side-stack">
+            <section class="panel mission-panel" id="missions">
+              <div class="panel-heading compact">
+                <div>
+                  <p class="eyebrow">Today</p>
+                  <h2>Daily mission</h2>
+                </div>
+                <button class="icon-btn" id="newMissionBtn" title="Generate mission" aria-label="Generate mission">New</button>
+              </div>
+              <div id="missionContent" class="mission-empty">Generate a roadmap to unlock your first mission.</div>
+            </section>
+
+            <section class="panel achievements-panel">
+              <div class="panel-heading compact">
+                <div>
+                  <p class="eyebrow">Gamification</p>
+                  <h2>Achievements</h2>
+                </div>
+              </div>
+              <div class="badge-grid" id="achievementGrid"></div>
+            </section>
+
+            <section class="panel chat-panel" id="mentor">
+              <div class="panel-heading compact">
+                <div>
+                  <p class="eyebrow">AI Mentor</p>
+                  <h2>Ask for guidance</h2>
+                </div>
+              </div>
+              <div class="quick-prompts" id="quickPrompts">
+                <button type="button">Suggest a project</button>
+                <button type="button">Prepare me for interviews</button>
+                <button type="button">Explain my next skill</button>
+              </div>
+              <div class="chat-log" id="chatLog"></div>
+              <form class="chat-form" id="chatForm">
+                <input id="chatInput" type="text" placeholder="Ask about projects, debugging, skills, or interviews..." />
+                <button type="submit">Send</button>
+              </form>
+            </section>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js?v=mentor-debug-1"></script>
+  </body>
+</html>
