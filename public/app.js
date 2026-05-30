@@ -237,19 +237,18 @@ function renderRoadmap() {
   els.roadmapMeta.innerHTML = `
     ${insightCard("Role overview", roadmap.overview)}
     ${insightCard("Career demand", roadmap.demand)}
- ${insightCard("Salary insights", `
-Junior: ${roadmap.salaryInsights?.junior || "N/A"}<br>
-Mid: ${roadmap.salaryInsights?.mid || "N/A"}<br>
-Senior: ${roadmap.salaryInsights?.senior || "N/A"}
-`)}
+ ${insightCard(
+  "Salary insights",
+  roadmap.salaryInsights?.averageSalary || "Salary data unavailable"
+)}
   `;
   console.log("ROADMAP DATA:", roadmap);
 console.log("NODES:", roadmap.nodes);
-  if (roadmap.nodes && roadmap.nodes.length) {
-  renderRoadmapVisual(roadmap.nodes);
-} else {
-  renderPhases(roadmap);
+ if (roadmap.nodes && roadmap.nodes.length) {
+    renderRoadmapVisual(roadmap.nodes);
 }
+
+renderPhases(roadmap);
 console.log("PHASES HTML", els.phaseList.innerHTML);
 }
 
